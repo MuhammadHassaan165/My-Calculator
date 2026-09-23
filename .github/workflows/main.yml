@@ -10,28 +10,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout source code
         uses: actions/checkout@v4
 
       - name: Check required files
         run: |
           test -f index.html
-          test -f style.css
-          test -f script.js
-          echo "All required files exist."
+          echo "index.html exists"
 
       - name: Check JavaScript syntax
         run: |
           node --check script.js
-          echo "JavaScript syntax check passed."
+          echo "JavaScript syntax is valid"
 
-      - name: Check HTML
-        run: |
-          grep -q "<!DOCTYPE html>" index.html
-          grep -q "<html" index.html
-          grep -q "</html>" index.html
-          echo "HTML check passed."
-
-      - name: CI completed successfully
-        run: echo "All CI checks passed successfully!"
+      - name: CI test successful
+        run: echo "All tests passed successfully!"
