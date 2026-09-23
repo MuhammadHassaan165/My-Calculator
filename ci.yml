@@ -10,7 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+
+      - name: Checkout source code
         uses: actions/checkout@v4
 
       - name: Check required files
@@ -18,9 +19,19 @@ jobs:
           test -f index.html
           test -f style.css
           test -f script.js
+          echo "All required files exist."
 
       - name: Check JavaScript syntax
-        run: node --check script.js
+        run: |
+          node --check script.js
+          echo "JavaScript syntax check passed."
 
-      - name: CI successful
-        run: echo "All basic tests passed!"
+      - name: Check HTML
+        run: |
+          grep -q "<!DOCTYPE html>" index.html
+          grep -q "<html" index.html
+          grep -q "</html>" index.html
+          echo "HTML check passed."
+
+      - name: CI completed successfully
+        run: echo "All CI checks passed successfully!"
